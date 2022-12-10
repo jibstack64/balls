@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include <iostream>
-#include <array>
+#include <vector>
 
 // contains a balls location and size
 struct ball {
@@ -63,7 +63,7 @@ int main() {
     const int fps = 60;
     const char * title = "Balls";
 
-    std::array<ball, 2> balls = {
+    std::vector<ball> balls = {
         ball(200.0, 600.0, 50, GREEN),
         ball(100.0, 200.0, 10, RAYWHITE)
     };
@@ -72,6 +72,11 @@ int main() {
     SetTargetFPS(fps);
 
     while (!WindowShouldClose()) {
+        // add new balls
+        if (IsKeyReleased(KEY_EQUAL)) {
+            srand(time(0));
+            balls.push_back(ball(50 + (rand() % 600), 50 + (rand() % 600), 5 + (rand() % 50), YELLOW));
+        }
         // check for clicked balls
         if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             for (auto& b : balls) {
@@ -115,7 +120,7 @@ int main() {
                     if (b.v < maxFall * b.weight()) {
                         b.v += gravity * b.weight();
                         b.distance += b.v;
-                        if (b.initialEnergy == 0 && b.below(height-5)) {
+                        if (b.initialEnergy == 0 && b.below(height)) {
                             b.initialEnergy = b.distance / 2;
                             b.distance = 0;
                         }
