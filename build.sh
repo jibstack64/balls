@@ -1,0 +1,1 @@
+g++ -lraylib -lGL -lm -pthread -ldl balls.cpp -o balls
