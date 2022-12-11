@@ -1,5 +1,7 @@
 # balls
 
+My `balls` don't bounce!! I need to fix this project.
+
 A demonstration of simple bouncing physics.
 Not realistic physics - just me messing around because I was bored.
 
